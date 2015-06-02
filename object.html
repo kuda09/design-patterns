@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Design Patterns</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="messageSender"></div>
+    <div class="messagePreview"></div>
+    <div class="newMessageCounter"></div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+    /*var myModule;
+     myModule = {
+
+     myConfig: {
+     useCaching: true,
+     language: 'en'
+     },
+
+     saySomething: function () {
+     console.log('Where in the world is Paul Irish today?');
+     },
+
+     reportMyConfig: function () {
+     console.log('Caching is: ' + (this.myConfig.useCaching ? 'enabled' : 'disabled'));
+     },
+
+     updateMyConfig: function (newConfig) {
+
+     if (typeof newConfig === "object") {
+     this.myConfig = newConfig;
+     console.log(this.myConfig.language);
+     } else {
+     try {
+     if (typeof newConfig !== 'object') throw new Error("arguments must be an object. You passed in an " + (typeof newConfig));
+     } catch (error) {
+     console.log(error);
+     }
+     }
+     }
+     };
+
+     myModule.saySomething();
+
+
+     myModule.updateMyConfig('kuda');*/
+    /*var basketModule = (function (){
+
+     //Private Functionality
+
+     var basket = [];
+
+     var doSomethingPrivate = function (){
+
+     }
+
+
+     var doSomethingElsePrivate = function (){
+
+     }
+
+
+     return {
+     addItem: function (values){
+     basket.push(values);
+     },
+     getItemCount: function (){
+     return basket.length;
+     },
+     doSomething: doSomethingPrivate,
+     getTotal: function (){
+
+     var q = this.getItemCount();
+     var p = 0;
+
+
+     while(q--){
+     p += basket[q].price;
+     }
+
+     return p;
+     }
+     }
+     })();
+     */
+    /* var myModule = (function ($){
+
+     function privateMethod(args1){
+     $('body').html(args1);
+     }
+
+
+     return {
+     publicMethod: privateMethod('<div class="container">Contained in a class</div>')
+     }
+
+     })(jQuery);*/
+    /* function library (module){
+
+     $(function (){
+     if(module.init){
+     module.init();
+     }
+     })
+
+     return module;
+     }
+
+
+     var myLib = library(function(){
+
+     return {
+     init: function(){
+     console.log('kuda');
+     }
+     }
+     })();
+     */
+    /*    var Module = (function(){
+
+
+     var my = {},
+     privateVariable = 1 ;
+
+
+     function privateMethod (){
+
+     }
+
+     my.moduleProperty = 1;
+     my.moduleMethod = function (name){
+     console.log(name);
+     }
+
+     return my;
+     })();*/
+    /*var myRevealingModule = (function(){
+
+     var privateCounter = 0;
+
+     function privateFunction (){
+     privateCounter++;
+     }
+
+     function publicFunction (){
+     publicIncrement();
+     }
+
+     function publicIncrement (){
+     privateFunction();
+     }
+
+     function publicGetCount () {
+     return privateCounter;
+     }
+
+     // reveal public pointers to
+     //private functions and properties
+
+     return {
+     start: publicFunction,
+     increment: publicIncrement,
+     count: publicGetCount
+     }
+     })();
+
+     myRevealingModule.start();
+     myRevealingModule.count();*/
+    /*var mySingleton = (function (){
+
+     //Instance stores a reference to the Singleton
+     var instance;
+
+
+     function init (){
+     // Singleton
+     // Private variables and methods
+
+     function privateMethod(){
+     console.log('I am a private method');
+     }
+
+     var privateVariable = "I am private property";
+
+     var privateRandomNumber = Math.random();
+
+
+     return {
+     //Public methods and variables
+     publicMethod: function () {
+     console.log("The public can see me!");
+     },
+     publicProperty: "I am aslo a public property",
+     getRandomNumber: function (){
+     return privateRandomNumber;
+     }
+     }
+     }
+
+
+     return {
+     //Get the Singleton instance if one exists
+     //or create one if it doesn't
+     getInstance: function (){
+
+     if(!instance){
+     instance = init();
+     }
+
+     return instance;
+     }
+     }
+     })();
+
+     var ref = mySingleton.getInstance();
+
+     console.log(ref);*/
+    /*
+     var SingletonTester;
+     SingletonTester = (function () {
+
+     function Singleton(options) {
+
+     options = options || {};
+
+     this.name = "Singleton Tester";
+     this.pointX = options.pointX || 6;
+     this.pointY = options.pointY || 10;
+     }
+
+     var instance;
+
+     //an emulation of static variables and methods
+     var _static = {
+
+     name: "Singleton Tester",
+
+     //Method for getting an instance. It returns a singleton instance of a singleton  object
+     getInstance: function (options){
+
+     if(instance === undefined) {
+     instance = new Singleton(options);
+     }
+
+     return instance;
+     }
+
+     }
+
+     return _static;
+     })();
+
+
+     var single = SingletonTester.getInstance({pointX:10});
+
+     console.log(single.pointX);*/
+    /*//observers
+     function ObserverList (){
+     this.observerList = [];
+     }
+
+     ObserverList.prototype.add = function (obj){
+     return this.observerList.push(obj);
+     }
+
+     ObserverList.prototype.count = function (){
+     return this.observerList.length;
+     }
+
+     ObserverList.prototype.get = function (index){
+     if (index > -1 && index < this.observerList.length){
+     return this.observerList[index];
+     }
+     }
+
+     ObserverList.prototype.indexOf = function (obj, startIndex){
+
+     var i = startIndex;
+
+     while (i < this.observerList.length){
+     if(this.observerList[i] === obj){
+     return i;
+     }
+
+     i++;
+     }
+
+     return -1;
+     }
+
+     ObserverList.prototype.removeAt = function (index){
+     this.observerList.splice(index, 1);
+     }
+
+     //subjexts
+
+     function Subject (){
+     this.observers = new ObserverList();
+     }
+
+     Subject.prototype.addObserver = function (observer){
+     this.observers.add(observer);
+     }
+
+     Subject.prototype.removeObserver = function (observer){
+     this.observers.removeAt(this.observers.indexOf(observer,0));
+     }
+
+     Subject.prototype.notify = function (context){
+     var observerCount = this.observers.count();
+
+     for (var i = 0; i < observerCount; i++){
+     this.observers.get(i).update(context);
+     }
+     }
+
+     function Observer (){
+     this.update = function (){
+
+     }
+     }
+
+
+     function extend (extension, obj){
+     for (var key in extension){
+     obj[key] = extension[key];
+     }
+     }
+
+     //reference to our Dom elements
+     var controlCheckbox = $('#mainCheckbox'),
+     addBtn = $('#addNewObserver'),
+     container = $('#observersContainer');
+
+
+     extend( new Subject(), controlCheckbox);
+
+     controlCheckbox.on('click', function () {
+
+     $(this).notify(controlCheckbox.checked);
+     })
+
+     addBtn.on('click', function () {
+
+
+     var check = document.createElement("input");
+     check.type = "checkbox";
+
+     extend(new Observer(), check);
+
+     check.update = function (value){
+     this.checked = value;
+     }
+
+     controlCheckbox.addObserver(check);
+
+     container.append(check);
+     })*/
+    /*
+
+    var pubsub = {};
+
+
+    (function (myObject) {
+
+        //storage for topics that can be broadcast or listenened to
+        var topics = {};
+
+
+
+        //an topic indentifier
+        var subUid = -1;
+
+
+        */
+/**
+         *
+         * @param topic {string}
+         * @param args {object}
+         * @returns {*}
+         *//*
+
+        myObject.publish = function (topic, args){
+
+            // do not publish anything if there are no topics
+            if(!topics[topic]){
+                return false;
+            }
+
+
+            var subscribers = topics[topic];
+            var len = subscribers ? subscribers.length : 0;
+
+            while(len--){
+                subscribers[len].func(topic,args);
+            }
+
+            return this;
+        }
+
+        */
+/**
+         *
+         * @param topic {string}
+         * @param func {callback}
+         * @returns {string}
+         *//*
+
+        myObject.subscribe = function (topic, func){
+
+            if(!topics[topic]){
+                topics[topic] = [];
+            }
+
+
+            var token = ( ++subUid).toString();
+
+            topics[topic].push({
+                token: token,
+                func: func
+            })
+
+            return token;
+        }
+
+        myObject.unsubscribe = function (token){
+            for(var m in topics){
+                if(topics[m]){
+                    for(var i = 0, j = topics[m].length; i < j; i++){
+                        if(topics[m][i].token === token){
+                            topics[m].splice(i,1);
+                            return token;
+                        }
+                    }
+                }
+            }
+
+            return this;
+        }
+
+    })(pubsub);
+
+
+    mailCounter = 0;
+
+    var subscriber1 = pubsub.subscribe("inbox/newMessage", function (topic, data) {
+
+        console.log("A new message was received: " + topic);
+
+        $(".messageSender").html(data.sender);
+        $(".messagePreview").html(data.body);
+    });
+
+
+    var subscribe2 = pubsub.subscribe("inbox/newMessage", function (topic, data) {
+
+        $(".newMessageCounter").html(++mailCounter);
+    });
+
+    pubsub.publish("inbox/newMessage",
+        {
+            sender: "hello@google.com",
+            body: "Hey there! How are your doing today?"
+        }
+    )
+*/
+
+
+
+
+</script>
+</body>
+</html>

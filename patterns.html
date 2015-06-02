@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Mediator Pattern</title>
+
+    <style>
+        .menu {
+            width: 400px;
+            height: 400px;
+            background-color: darkred;
+        }
+
+
+        .menu[data-state=closed]{
+            display: none;
+        }
+
+        .menu[data-state=open]{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu">
+    hey
+</div>
+
+<button class="btn">click</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+    var $menu = $('.menu');
+
+
+    var toggleState = function (elem, closed, open){
+        var elem = $(elem);
+
+        elem.attr('data-state', elem.attr('data-state') === closed ? open : closed);
+    }
+
+    $('.btn').on('click', function (e){
+
+        toggleState('.menu','closed', 'open');
+    })
+
+
+
+</script>
+
+</body>
+</html>
